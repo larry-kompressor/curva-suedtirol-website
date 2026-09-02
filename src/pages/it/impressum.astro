@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Note legali – Curva FC Südtirol" lang="it" description="Note legali della Curva FC Südtirol.">
+  <Header lang="it" />
+
+  <main>
+    <section class="section container legal">
+      <h1>Note legali</h1>
+
+      <h2>Dati secondo le disposizioni di legge</h2>
+      <p>
+        [PLACEHOLDER: Nome del gruppo/associazione]<br />
+        [PLACEHOLDER: Indirizzo – via, CAP, città]<br />
+        [PLACEHOLDER: Paese]
+      </p>
+
+      <h2>Responsabile del contenuto</h2>
+      <p>
+        [PLACEHOLDER: Nome del responsabile]<br />
+        [PLACEHOLDER: Email di contatto]
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        Questo sito è ospitato su Cloudflare Pages (Cloudflare, Inc., 101 Townsend St,
+        San Francisco, CA 94107, USA).
+      </p>
+
+      <h2>Esclusione di responsabilità</h2>
+      <p>
+        Nonostante un controllo accurato dei contenuti, non ci assumiamo alcuna responsabilità
+        per i contenuti di link esterni. Per il contenuto delle pagine collegate sono
+        responsabili esclusivamente i rispettivi gestori.
+      </p>
+
+      <p class="legal-note">
+        [Nota: questo testo è una struttura generale e non sostituisce una consulenza legale.
+        Si prega di integrare i dati specifici (associazione/gruppo, indirizzo, responsabile) e,
+        in caso di dubbio, farli verificare da un legale, in particolare secondo il diritto
+        italiano.]
+      </p>
+    </section>
+  </main>
+
+  <Footer lang="it" />
+</Layout>
+
+<style>
+  .legal {
+    max-width: 750px;
+  }
+
+  .legal h2 {
+    font-size: 1.3rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  .legal-note {
+    margin-top: var(--space-lg);
+    padding: var(--space-sm);
+    border: 2px dashed var(--color-black-softer);
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+</style>

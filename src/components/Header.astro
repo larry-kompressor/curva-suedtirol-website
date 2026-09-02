@@ -1,0 +1,135 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.png';
+
+interface Props {
+  lang: 'de' | 'it';
+}
+
+const { lang } = Astro.props;
+
+const nav = {
+  de: {
+    home: 'Startseite',
+    gruppen: 'Gruppen',
+    fotos: 'Fotos',
+    aktuelles: 'Aktuelles',
+    kontakt: 'Kontakt',
+  },
+  it: {
+    home: 'Home',
+    gruppen: 'Gruppi',
+    fotos: 'Foto',
+    aktuelles: 'News',
+    kontakt: 'Contatti',
+  },
+};
+
+const t = nav[lang];
+
+// Pfad ohne Sprachpräfix ermitteln, um beim Sprachwechsel auf derselben Unterseite zu bleiben
+const path = Astro.url.pathname.replace(/^\/(de|it)/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+        <a href={`/${lang}/`} class="site-header__logo">
+      <Image src={logo} alt="Curva FC Südtirol" width={40} height={40} />
+      <span>CURVA</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href={`/${lang}/`}>{t.home}</a>
+      <a href={`/${lang}/gruppen`}>{t.gruppen}</a>
+      <a href={`/${lang}/fotos`}>{t.fotos}</a>
+      <a href={`/${lang}/aktuelles`}>{t.aktuelles}</a>
+      <a href={`/${lang}/kontakt`}>{t.kontakt}</a>
+    </nav>
+
+    <div class="lang-switch" aria-label="Sprache wechseln">
+      <a href={`/de${path}`} class:list={[{ 'is-active': lang === 'de' }]}>DE</a>
+      <span>/</span>
+      <a href={`/it${path}`} class:list={[{ 'is-active': lang === 'it' }]}>IT</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: var(--border-width) solid var(--color-red);
+    background-color: var(--color-black);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-sm);
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .site-header__logo {
+    font-family: var(--font-headline);
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--color-white);
+  }
+
+  .site-header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .site-header__logo img {
+    height: 32px;
+    width: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .site-nav a {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .site-nav a:hover {
+    color: var(--color-red);
+    border-color: var(--color-red);
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 0.3rem;
+    font-family: var(--font-headline);
+    font-size: 0.9rem;
+    color: var(--color-black-softer);
+  }
+
+  .lang-switch a {
+    color: var(--color-white);
+    opacity: 0.5;
+  }
+
+  .lang-switch a.is-active {
+    opacity: 1;
+    color: var(--color-red);
+  }
+
+  .lang-switch span {
+    color: var(--color-black-softer);
+  }
+</style>

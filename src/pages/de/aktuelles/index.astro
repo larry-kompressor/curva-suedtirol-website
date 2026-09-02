@@ -1,0 +1,122 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { categoryLabels } from '../../../data/newsCategories.js';
+
+const allNews = await getCollection('news');
+const newsDe = allNews
+  .filter((entry) => entry.data.lang === 'de')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function slugFromId(id: string) {
+  return id.replace(/^de\//, '').replace(/\.md$/, '');
+}
+---
+
+<Layout title="Aktuelles – Curva FC Südtirol" lang="de" description="Alle News der Curva FC Südtirol.">
+  <Header lang="de" />
+
+  <main>
+    <section class="section container">
+      <h1>Aktuelles</h1>
+
+      <div class="news-list">
+        {newsDe.map((entry) => (
+          <article class="news-card">
+            <span class="news-card__category">{categoryLabels.de[entry.data.category]}</span>
+            <a href={`/de/aktuelles/${slugFromId(entry.id)}`}>
+              <p class="news-card__date">
+                {entry.data.date.toLocaleDateString('de-AT', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
+              <h2>{entry.data.title}</h2>
+              <p>{entry.data.excerpt}</p>
+              <span class="news-card__link">Weiterlesen →</span>
+            </a>
+            {entry.data.externalLink && (
+              <a href={entry.data.externalLink} target="_blank" rel="noopener noreferrer" class="news-card__external">
+                {entry.data.externalLinkLabel || 'Link öffnen'} ↗
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+
+      {newsDe.length === 0 && <p>Aktuell gibt es noch keine News.</p>}
+    </section>
+  </main>
+
+  <Footer lang="de" />
+</Layout>
+
+<style>
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 800px;
+  }
+
+  .news-card {
+    border-bottom: var(--border-width) solid var(--color-black-softer);
+    padding-bottom: var(--space-md);
+  }
+
+  .news-card__category {
+    display: inline-block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .news-card__date {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-red);
+    margin-bottom: var(--space-xs);
+  }
+
+  .news-card h2 {
+    font-size: 1.6rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .news-card__link {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    color: var(--color-white);
+  }
+
+  .news-card:hover .news-card__link {
+    color: var(--color-red);
+  }
+
+  .news-card__external {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    border: 2px solid var(--color-white);
+    padding: 0.4rem 0.9rem;
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+
+  .news-card__external:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+  }
+</style>

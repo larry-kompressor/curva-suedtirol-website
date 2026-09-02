@@ -1,0 +1,74 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { fotoAlben } from '../../../data/fotoAlben.js';
+
+export function getStaticPaths() {
+  return fotoAlben.map((album) => ({
+    params: { slug: album.slug },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+---
+
+<Layout title={`${album.it.title} – Curva FC Südtirol`} lang="it" description={`Album fotografico: ${album.it.title}`}>
+  <Header lang="it" />
+
+  <main>
+    <section class="section container">
+      <a href="/it/fotos" class="back-link">← Tutti gli album</a>
+      <h1>{album.it.title}</h1>
+
+      {album.images.length === 0 ? (
+        <p>Per questo album non sono ancora state caricate foto.</p>
+      ) : (
+        <div class="foto-grid">
+          {album.images.map((img) => (
+            <a href={`/fotos/${album.slug}/${img}`} target="_blank" rel="noopener noreferrer">
+              <img src={`/fotos/${album.slug}/${img}`} alt={album.it.title} loading="lazy" />
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+
+  <Footer lang="it" />
+</Layout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+  }
+
+  .back-link:hover {
+    color: var(--color-red);
+  }
+
+  .foto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+  }
+
+  .foto-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    filter: grayscale(0.3);
+    transition: filter 0.2s ease;
+  }
+
+  .foto-grid img:hover {
+    filter: grayscale(0);
+  }
+</style>

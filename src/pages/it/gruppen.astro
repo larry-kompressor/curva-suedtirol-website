@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { gruppen } from '../../data/gruppen.js';
+---
+
+<Layout title="Gruppi – Curva FC Südtirol" lang="it" description="I gruppi Ultras della Curva FC Südtirol.">
+  <Header lang="it" />
+
+  <main>
+    <section class="section container">
+      <h1>Gruppi</h1>
+      <p class="intro">
+        [Testo segnaposto: breve introduzione alla Curva nel suo insieme – quanti gruppi ci sono,
+        da quando esiste la Curva, cosa li unisce.]
+      </p>
+
+      <div class="gruppen-grid">
+        {gruppen.map((gruppe) => (
+          <article class="gruppe-card">
+            <h2>{gruppe.name}</h2>
+            <p class="gruppe-card__meta">Fondato nel {gruppe.gegruendet}</p>
+            <p>{gruppe.it.beschreibung}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="it" />
+</Layout>
+
+<style>
+  .intro {
+    max-width: 70ch;
+    margin-bottom: var(--space-lg);
+    opacity: 0.85;
+  }
+
+  .gruppen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .gruppe-card {
+    border: var(--border-width) solid var(--color-black-softer);
+    padding: var(--space-md);
+    background-color: var(--color-black-soft);
+    transition: border-color 0.2s ease;
+  }
+
+  .gruppe-card:hover {
+    border-color: var(--color-red);
+  }
+
+  .gruppe-card h2 {
+    font-size: 1.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .gruppe-card__meta {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-red);
+    margin-bottom: var(--space-sm);
+  }
+</style>

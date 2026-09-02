@@ -1,0 +1,100 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { fotoAlben } from '../../../data/fotoAlben.js';
+
+const albenSorted = [...fotoAlben].sort((a, b) => new Date(b.date) - new Date(a.date));
+---
+
+<Layout title="Fotos – Curva FC Südtirol" lang="de" description="Fotogalerien der Curva FC Südtirol – Auswärtsfahrten, Choreos und mehr.">
+  <Header lang="de" />
+
+  <main>
+    <section class="section container">
+      <h1>Fotos</h1>
+      <p class="intro">Ausgewählte Alben von Auswärtsfahrten, Choreos und besonderen Anlässen.</p>
+
+      <div class="alben-grid">
+        {albenSorted.map((album) => (
+          <a href={`/de/fotos/${album.slug}`} class="album-card">
+            {album.images.length > 0 ? (
+              <img src={`/fotos/${album.slug}/${album.images[0]}`} alt={album.de.title} loading="lazy" />
+            ) : (
+              <div class="album-card__placeholder">Keine Fotos</div>
+            )}
+            <div class="album-card__info">
+              <h2>{album.de.title}</h2>
+              <p class="album-card__count">{album.images.length} Fotos</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="de" />
+</Layout>
+
+<style>
+  .intro {
+    max-width: 65ch;
+    margin-bottom: var(--space-lg);
+    opacity: 0.85;
+  }
+
+  .alben-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .album-card {
+    display: block;
+    border: var(--border-width) solid var(--color-black-softer);
+    background-color: var(--color-black-soft);
+    transition: border-color 0.2s ease;
+  }
+
+  .album-card:hover {
+    border-color: var(--color-red);
+  }
+
+  .album-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    filter: grayscale(0.3);
+  }
+
+  .album-card__placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black-softer);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .album-card__info {
+    padding: var(--space-sm);
+  }
+
+  .album-card h2 {
+    font-size: 1.2rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0.2rem;
+  }
+
+  .album-card__count {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-red);
+  }
+</style>

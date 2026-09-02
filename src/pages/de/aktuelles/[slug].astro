@@ -1,0 +1,94 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+import { categoryLabels } from '../../../data/newsCategories.js';
+
+export async function getStaticPaths() {
+  const allNews = await getCollection('news');
+  const newsDe = allNews.filter((entry) => entry.data.lang === 'de');
+
+  return newsDe.map((entry) => {
+    const slug = entry.id.replace(/^de\//, '').replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.title} – Curva FC Südtirol`} lang="de" description={entry.data.excerpt}>
+  <Header lang="de" />
+
+  <main>
+    <article class="section container news-article">
+      <span class="news-article__category">{categoryLabels.de[entry.data.category]}</span>
+      <p class="news-article__date">
+        {entry.data.date.toLocaleDateString('de-AT', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+      <h1>{entry.data.title}</h1>
+
+      {entry.data.externalLink && (
+        <a href={entry.data.externalLink} target="_blank" rel="noopener noreferrer" class="btn news-article__cta">
+          {entry.data.externalLinkLabel || 'Link öffnen'} ↗
+        </a>
+      )}
+
+      <div class="news-article__content">
+        <Content />
+      </div>
+      <a href="/de/aktuelles" class="btn btn--outline">← Zurück zu Aktuelles</a>
+    </article>
+  </main>
+
+  <Footer lang="de" />
+</Layout>
+
+<style>
+  .news-article {
+    max-width: 750px;
+  }
+
+  .news-article__category {
+    display: inline-block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .news-article__date {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-red);
+    margin-bottom: var(--space-sm);
+  }
+
+  .news-article__cta {
+    display: inline-block;
+    margin-block: var(--space-sm);
+  }
+
+  .news-article__content {
+    margin-block: var(--space-md);
+    line-height: 1.8;
+  }
+
+  .news-article__content :global(p) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .news-article__content :global(strong) {
+    color: var(--color-red);
+  }
+</style>

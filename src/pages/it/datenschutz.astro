@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Privacy – Curva FC Südtirol" lang="it" description="Informativa sulla privacy della Curva FC Südtirol.">
+  <Header lang="it" />
+
+  <main>
+    <section class="section container legal">
+      <h1>Informativa sulla privacy</h1>
+
+      <h2>1. Titolare del trattamento</h2>
+      <p>
+        [PLACEHOLDER: Nome del gruppo/associazione]<br />
+        [PLACEHOLDER: Indirizzo]<br />
+        [PLACEHOLDER: Email di contatto]
+      </p>
+
+      <h2>2. Hosting</h2>
+      <p>
+        Questo sito è ospitato su Cloudflare Pages. Durante la visita del sito, Cloudflare
+        raccoglie automaticamente dati di log tecnicamente necessari (ad es. indirizzo IP,
+        orario di accesso, pagina richiesta) per garantire un'erogazione sicura e stabile del
+        sito. Ulteriori informazioni nell'informativa sulla privacy di Cloudflare:
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">
+          cloudflare.com/privacypolicy
+        </a>.
+      </p>
+
+      <h2>3. Modulo di contatto</h2>
+      <p>
+        Per le richieste utilizziamo un modulo esterno di Google Forms. Compilando il modulo, i
+        vostri dati (ad es. nome, email, messaggio) vengono trasmessi direttamente a Google e lì
+        conservati. Si applica l'informativa sulla privacy di Google:
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+          policies.google.com/privacy
+        </a>.
+      </p>
+
+      <h2>4. Cookie</h2>
+      <p>
+        Questo sito non utilizza cookie propri di tracciamento o analisi. Non vengono creati
+        profili utente.
+      </p>
+
+      <h2>5. I vostri diritti</h2>
+      <p>
+        Avete il diritto di accesso, rettifica, cancellazione e limitazione del trattamento dei
+        vostri dati personali. Per esercitare questi diritti, contattateci all'indirizzo email
+        sopra indicato.
+      </p>
+
+      <p class="legal-note">
+        [Nota: questo testo è una struttura generale e non sostituisce una consulenza legale.
+        Verificare se occorre integrare altri servizi (es. social media, strumenti statistici) e,
+        in caso di dubbio, farli verificare da un legale.]
+      </p>
+    </section>
+  </main>
+
+  <Footer lang="it" />
+</Layout>
+
+<style>
+  .legal {
+    max-width: 750px;
+  }
+
+  .legal h2 {
+    font-size: 1.3rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  .legal p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal p a:hover {
+    color: var(--color-red);
+  }
+
+  .legal-note {
+    margin-top: var(--space-lg);
+    padding: var(--space-sm);
+    border: 2px dashed var(--color-black-softer);
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+</style>

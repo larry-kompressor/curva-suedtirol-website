@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Datenschutz – Curva FC Südtirol" lang="de" description="Datenschutzerklärung der Curva FC Südtirol.">
+  <Header lang="de" />
+
+  <main>
+    <section class="section container legal">
+      <h1>Datenschutzerklärung</h1>
+
+      <h2>1. Verantwortliche Stelle</h2>
+      <p>
+        [PLATZHALTER: Name der Gruppe/Vereinigung]<br />
+        [PLATZHALTER: Anschrift]<br />
+        [PLATZHALTER: Kontakt-E-Mail]
+      </p>
+
+      <h2>2. Hosting</h2>
+      <p>
+        Diese Website wird bei Cloudflare Pages gehostet. Beim Besuch der Website werden durch
+        Cloudflare technisch notwendige Server-Logdaten (z. B. IP-Adresse, Zugriffszeitpunkt,
+        aufgerufene Seite) automatisch erfasst, um die Website sicher und stabil auszuliefern.
+        Weitere Informationen: die Datenschutzerklärung von Cloudflare unter
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">
+          cloudflare.com/privacypolicy
+        </a>.
+      </p>
+
+      <h2>3. Kontaktformular</h2>
+      <p>
+        Für Anfragen nutzen wir ein externes Formular von Google Forms. Wenn ihr dieses Formular
+        ausfüllt, werden eure Angaben (z. B. Name, E-Mail, Nachricht) direkt an Google übermittelt
+        und dort gespeichert. Es gilt die Datenschutzerklärung von Google:
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+          policies.google.com/privacy
+        </a>.
+      </p>
+
+      <h2>4. Cookies</h2>
+      <p>
+        Diese Website selbst setzt keine eigenen Tracking- oder Analyse-Cookies. Es werden keine
+        Nutzerprofile erstellt.
+      </p>
+
+      <h2>5. Eure Rechte</h2>
+      <p>
+        Ihr habt jederzeit das Recht auf Auskunft, Berichtigung, Löschung sowie Einschränkung der
+        Verarbeitung eurer personenbezogenen Daten. Wendet euch dazu an die oben genannte
+        Kontakt-E-Mail.
+      </p>
+
+      <p class="legal-note">
+        [Hinweis: Dieser Text ist ein allgemeines Grundgerüst und ersetzt keine Rechtsberatung.
+        Bitte prüfen, ob weitere Dienste (z. B. Social-Media-Einbindungen, Statistik-Tools)
+        ergänzt werden müssen, und im Zweifel rechtlich prüfen lassen.]
+      </p>
+    </section>
+  </main>
+
+  <Footer lang="de" />
+</Layout>
+
+<style>
+  .legal {
+    max-width: 750px;
+  }
+
+  .legal h2 {
+    font-size: 1.3rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-sm);
+    max-width: none;
+  }
+
+  .legal p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal p a:hover {
+    color: var(--color-red);
+  }
+
+  .legal-note {
+    margin-top: var(--space-lg);
+    padding: var(--space-sm);
+    border: 2px dashed var(--color-black-softer);
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+interface Props {
+  lang: 'de' | 'it';
+}
+
+const { lang } = Astro.props;
+
+const text = {
+  de: {
+    claim: 'Sempre Presente. Sempre Curva.',
+    impressum: 'Impressum',
+    privacy: 'Datenschutz',
+  },
+  it: {
+    claim: 'Sempre Presente. Sempre Curva.',
+    impressum: 'Note legali',
+    privacy: 'Privacy',
+  },
+};
+
+const t = text[lang];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="site-footer__claim">{t.claim}</p>
+
+    <div class="site-footer__social">
+      <a href="https://instagram.com/DEIN_INSTAGRAM_HANDLE" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://facebook.com/DEINE_FACEBOOK_SEITE" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </div>
+
+    <div class="site-footer__legal">
+      <a href={`/${lang}/impressum`}>{t.impressum}</a>
+      <a href={`/${lang}/datenschutz`}>{t.privacy}</a>
+      <span>&copy; {year} Curva FC Südtirol</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: var(--border-width) solid var(--color-red);
+    padding-block: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-footer__claim {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-red);
+  }
+
+  .site-footer__social {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .site-footer__social a {
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+  }
+
+  .site-footer__social a:hover {
+    color: var(--color-red);
+  }
+
+  .site-footer__legal {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--color-black-softer);
+  }
+
+  .site-footer__legal a:hover {
+    color: var(--color-white);
+  }
+</style>

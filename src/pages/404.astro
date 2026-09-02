@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="404 – Seite nicht gefunden" lang="de" description="Diese Seite existiert nicht.">
+  <Header lang="de" />
+
+  <main>
+    <section class="section container error-page">
+      <h1>404</h1>
+      <p>Diese Seite gibt es nicht. Vielleicht ausverkauft, vielleicht nie existiert.</p>
+      <a href="/de/" class="btn">Zurück zur Startseite</a>
+    </section>
+  </main>
+
+  <Footer lang="de" />
+</Layout>
+
+<style>
+  .error-page {
+    text-align: center;
+    padding-block: var(--space-xl);
+  }
+
+  .error-page h1 {
+    color: var(--color-red);
+    font-size: clamp(4rem, 15vw, 8rem);
+  }
+
+  .error-page p {
+    max-width: none;
+    margin-block: var(--space-sm) var(--space-md);
+    font-size: 1.1rem;
+  }
+</style>
