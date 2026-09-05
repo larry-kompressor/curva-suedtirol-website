@@ -2,46 +2,29 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { gruppen } from '../../data/gruppen.js';
 ---
 
-<Layout title="Impressum – Curva FC Südtirol" lang="de" description="Impressum der Curva FC Südtirol.">
+<Layout title="Gruppen – Curva FC Südtirol" lang="de" description="Die Ultras-Gruppen der Curva FC Südtirol im Überblick.">
   <Header lang="de" />
 
   <main>
-    <section class="section container legal">
-      <h1>Impressum</h1>
-
-      <h2>Angaben gemäß gesetzlicher Vorgaben</h2>
-      <p>
-        [PLATZHALTER: Name der Gruppe/Vereinigung]<br />
-        [PLATZHALTER: Anschrift – Straße, PLZ, Ort]<br />
-        [PLATZHALTER: Land]
+    <section class="section container">
+      <h1>Gruppen</h1>
+      <p class="intro">
+        [Platzhalter: Kurze Einleitung zur Curva als Ganzes – wie viele Gruppen es gibt,
+        seit wann es die Curva gibt, was sie verbindet.]
       </p>
 
-      <h2>Verantwortlich für den Inhalt</h2>
-      <p>
-        [PLATZHALTER: Name der verantwortlichen Person]<br />
-        [PLATZHALTER: Kontakt-E-Mail]
-      </p>
-
-      <h2>Hosting</h2>
-      <p>
-        Diese Website wird über Cloudflare Pages gehostet (Cloudflare, Inc., 101 Townsend St,
-        San Francisco, CA 94107, USA).
-      </p>
-
-      <h2>Haftungsausschluss</h2>
-      <p>
-        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte
-        externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber
-        verantwortlich.
-      </p>
-
-      <p class="legal-note">
-        [Hinweis: Dieser Text ist ein allgemeines Grundgerüst und ersetzt keine Rechtsberatung.
-        Bitte die konkreten Angaben (Verein/Gruppe, Anschrift, Verantwortliche Person) ergänzen
-        und im Zweifel rechtlich prüfen lassen, insbesondere im Hinblick auf italienisches Recht.]
-      </p>
+      <div class="gruppen-grid">
+        {gruppen.map((gruppe) => (
+          <article class="gruppe-card">
+            <h2>{gruppe.name}</h2>
+            <p class="gruppe-card__meta">Gegründet {gruppe.gegruendet}</p>
+            <p>{gruppe.de.beschreibung}</p>
+          </article>
+        ))}
+      </div>
     </section>
   </main>
 
@@ -49,28 +32,41 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <style>
-  .legal {
-    max-width: 750px;
+  .intro {
+    max-width: 70ch;
+    margin-bottom: var(--space-lg);
+    opacity: 0.85;
   }
 
-  .legal h2 {
-    font-size: 1.3rem;
+  .gruppen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .gruppe-card {
+    border: var(--border-width) solid var(--color-black-softer);
+    padding: var(--space-md);
+    background-color: var(--color-black-soft);
+    transition: border-color 0.2s ease;
+  }
+
+  .gruppe-card:hover {
+    border-color: var(--color-red);
+  }
+
+  .gruppe-card h2 {
+    font-size: 1.5rem;
     border-bottom: none;
     padding-bottom: 0;
-    margin-top: var(--space-md);
     margin-bottom: var(--space-xs);
   }
 
-  .legal p {
-    margin-bottom: var(--space-sm);
-    max-width: none;
-  }
-
-  .legal-note {
-    margin-top: var(--space-lg);
-    padding: var(--space-sm);
-    border: 2px dashed var(--color-black-softer);
+  .gruppe-card__meta {
     font-size: 0.85rem;
-    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-red);
+    margin-bottom: var(--space-sm);
   }
 </style>
